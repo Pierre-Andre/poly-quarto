@@ -138,7 +138,7 @@ punctuation sign (=.,;:!?=) or a "real" space
 or space equivalent (=~\n\t=). As this is a quite usual
 way to use inline formula it will be hopefully unnoticed.
 ** Useful functions
-- =poly-quarto-fix-latex-delimiters=
+- =poly-quarto-fix-latex-delimiters= try to fix LaTeX delimiters in order to have only non symmetric delimiters
 - =poly-quarto-insert-align-block= insert latex block with math =align*= environment at point (bound to =C-M-a=)
 - =poly-quarto-insert-latex-block= insert latex block without math environment at point (bound to =C-M-l=)
 - =poly-quarto-insert-inline-code= insert code chunk (src block, code block) at point (bound to =C-M-i=). Use =poly-quarto-set-lang= to set language (default to =r=)
@@ -147,6 +147,6 @@ way to use inline formula it will be hopefully unnoticed.
 - inside a code chunk (or code block or src block): all functions and bindings are provided by the mode of code chunk (for instance in R, all ess-r-mode functions and bindings)
 - inside a LaTeX block all functions and bindings are provided by LaTeX-mode (or latex-mode).
 
-** TODO
+** "TODO List"
 - [ ] cleaning preview/export
 - [ ] adding xref support for label/ref
