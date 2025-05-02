@@ -80,13 +80,14 @@ bla bla $x=2$, but $y=3$ and $z=4$.
 bla bla \(x=2\), but \(y=3\) and \(z=4\).
   #+end_src
 At after the last =$= in inline formula =$...$= there must be a
-punctuation sign (=.,;:!?=) or a space
-(~ ~ or =~\n\t=). As this is a quite usual
+punctuation sign (=.,;:!?=) or a "real" space
+or space equivalent (=~\n\t=). As this is a quite usual
 way to use inline formula it will be hopefully unnoticed.
 *** Using quarto
-1. Use =poly-quarto-insert-align-block= or =C-M-a= to insert displayed equation to have LaTeX block as
+1. Use =poly-quarto-insert-align-block= or =C-M-a= to insert displayed equation to
+   have LaTeX block as
    #+begin_src
-$$%
+   $$%
 \begin{align*}
 x&=2
 \end{align*}
@@ -94,36 +95,49 @@ $$
    #+end_src
 
 
-2. If you import some code without this convention use  =poly-quarto-fix-latex-delimiters= to fix LaTeX delimiters:
+2. If you import some code without this convention use  =poly-quarto-fix-latex-delimiters=
+    to fix LaTeX delimiters:
    - it will replace
-   #+begin_src
+     #+begin_src
 $$
 x&=2
 $$
-   #+end_src
-   by
-   #+begin_src
+     #+end_src
+     by
+     #+begin_src
 $$%
 \begin{align*}
 x&=2
 \end{align*}
 $$
-   #+end_src
-   and also math environments =eqnarray= =align= =equation= without LaTeX delimiters like
-   #+begin_src
+     #+end_src
+     and also math environments =eqnarray= =align= =equation= without LaTeX delimiters like
+     #+begin_src
 \begin{align*}
 x&=2
 \end{align*}
-   #+end_src
-    by math environment with LaTeX delimiters like
-   #+begin_src
+     #+end_src
+     by math environment with LaTeX delimiters like
+     #+begin_src
 $$%
 \begin{align*}
 x&=2
 \end{align*}
 $$
-   #+end_src
-   The list of math environments without LaTeX delimiters is by default =eqnarray= =align= =equation=  but it can be customized using custom variable =poly-quarto-latex-delims=.
+     #+end_src
+     The list of math environments without LaTeX delimiters is by
+     default =eqnarray= =align= =equation=
+     but it can be customized using custom
+     variable =poly-quarto-latex-delims=.
+** Useful functions
+- =poly-quarto-fix-latex-delimiters=
+- =poly-quarto-insert-align-block= insert latex block with math =align*= environment at point (bound to =C-M-a=)
+- =poly-quarto-insert-latex-block= insert latex block without math environment at point (bound to =C-M-l=)
+- =poly-quarto-insert-inline-code= insert code chunk (src block, code block) at point (bound to =C-M-i=). Use =poly-quarto-set-lang= to set language (default to =r=)
+- =poly-quarto-set-lang=: Change language (choices are given in custom variable =poly-quarto-all-codelang=)
+- =poly-quarto-send-chunk= Send the whole code chunk  (bound to =C-c C-c=)
+- inside a code chunk (or code block or src block): all functions and bindings are provided by the mode of code chunk (for instance in R, all ess-r-mode functions and bindings)
+- inside a LaTeX block all functions and bindings are provided by LaTeX-mode (or latex-mode).
 
 ** TODO
 - [ ] cleaning preview/export
