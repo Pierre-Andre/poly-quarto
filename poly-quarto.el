@@ -830,6 +830,7 @@ and followed by `.` or ` ` or `\t` or `\n`."
     ;;  (define-key markdown-mode-map (kbd "\C-c\C-i") nil)
     ;; (define-key markdown-mode-map "\C-c\C-i"   #'poly-quarto-insert-chunk)
     (define-key markdown-mode-map (kbd "C-M-i")   #'poly-quarto-insert-codechunk)
+    (define-key markdown-mode-map (kbd "C-M-f")   #'poly-quarto-fontify-around-pointpoly-quarto-insert-codechunk)
     ;; (define-key markdown-mode-map "\C-c\C-c" #'poly-quarto-send-chunk)
 ;; (with-eval-after-load 'polymode
   (define-key polymode-mode-map "\C-c\C-c" #'poly-quarto-send-chunk)
