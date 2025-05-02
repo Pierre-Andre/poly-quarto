@@ -39,8 +39,6 @@ x&=2
 \end{align*}
 $$
    #+end_src
-
-
 2. If you import some code without this convention use  =poly-quarto-fix-latex-delimiters=
     to fix LaTeX delimiters:
    - it will replace
@@ -67,7 +65,7 @@ $$%
 y&=3
 $$
      #+end_src
-     and also math environments =eqnarray= =align= =equation= without LaTeX delimiters like
+   - and also math environments =eqnarray= =align= =equation= without LaTeX delimiters like
      #+begin_src
 \begin{align*}
 x&=2
