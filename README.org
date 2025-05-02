@@ -146,6 +146,11 @@ way to use inline formula it will be hopefully unnoticed.
 - =poly-quarto-send-chunk= Send the whole code chunk  (bound to =C-c C-c=)
 - inside a code chunk (or code block or src block): all functions and bindings are provided by the mode of code chunk (for instance in R, all ess-r-mode functions and bindings)
 - inside a LaTeX block all functions and bindings are provided by LaTeX-mode (or latex-mode).
+- inside a LaTeX block all functions and bindings are provided by LaTeX-mode (or latex-mode).
+** Font-lock
+Font-lock does not work well inside doom emacs. If you are annoyed you can
+re-fontify the buffer entirely (=poly-quarto-fontify-current-buffer=)
+or around point (=poly-quarto-fontify-around-point= bound to =C-M-f=)
 
 ** "TODO List"
 - [ ] cleaning preview/export
