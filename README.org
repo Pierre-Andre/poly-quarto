@@ -49,7 +49,11 @@ $$
 \begin{align*}
 x=2
 \end{align*}
-\$\$
+$$
+
+$$
+y=3
+$$
      #+end_src
      by
      #+begin_src
@@ -57,6 +61,10 @@ $$%
 \begin{align*}
 x&=2
 \end{align*}
+$$
+
+$$%
+y&=3
 $$
      #+end_src
      and also math environments =eqnarray= =align= =equation= without LaTeX delimiters like
@@ -78,7 +86,7 @@ $$
      but it can be customized using custom
      variable =poly-quarto-latex-delims=.
 *** Inline and displayed formula problem
-To start math in LaTeX there is a long standing use of =$$ ... $$=
+To start math formulas in LaTeX there is a long standing use of =$$ ... $$=
 or =$ ... $= even it is preferable to use =\[ ... \]= or =\( ... \)=.
 This kind of delimiters are "symmetric" (the same delimiter denotes
 beginning and end of sequence) and it does not play well with polymode.
