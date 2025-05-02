@@ -1,0 +1,30 @@
+* (yet another) emacs mode for quarto
+=poly-quarto= is loosely based on [[https://github.com/quarto-dev/quarto-emacs][quarto-emacs]] mode an aims at
+editing [[https://quarto.org/][quarto]] documents.
+** Installation
+1. Install [[https://polymode.github.io/installation/][polymode]]
+2. Download (or clone) =poly-quarto.el= and put it in your emacs
+      directory (for example the directory
+      =/home/foouser/.emacs.d/lisp= or  =/home/foouser/.config/emacs/lisp=)
+3. To use poly-quarto mode, add the following to your
+      =.emacs= or =.emacs.d/init.el= or =.config/emacs/init.el=
+      #+begin_src emacs-lisp
+      (load "/home/foouser/.emacs.d/lisp/poly-quarto.el")
+      (require 'polymode)
+      (require 'poly-quarto)
+      #+end_src
+** Philosophy
+=poly-quarto= mode use code from [[https://github.com/quarto-dev/quarto-emacs][quarto-emacs]] and [[https://github.com/polymode/poly-markdown][poly-markdown]] to implement quarto mode based on [[https://github.com/polymode/poly-markdown][polymode]].
+It (tries to) offers
+- div/pandoc block inner mode for construct
+  #+begin_src
+::: {#mytag name="Myname"}
+
+:::
+  #+end_src
+  and outline support (Hit =<TAB>= on =::: {#mytag name="Myname"}= to hide/show, ie outline)
+- better LaTeX support
+- ispell support which skip code blocks
+** TODO
+- [ ] cleaning preview/export
+- [ ] adding xref support for label/ref
