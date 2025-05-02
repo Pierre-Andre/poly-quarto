@@ -757,6 +757,12 @@ and followed by `.` or ` ` or `\t` or `\n`."
    (concat "\n[\r]?" (make-string indent 32)) "\n"
    (string-remove-prefix (make-string indent 32) cmds)))
 
+(defun poly-quarto--remove-delim (cmds)
+  "remove '```{' and '```' in CMDS if needed."
+  (if (string-match "```{.*}[ \t\n]*\\([^`]+\n\\)[ \t]*```" cmds)
+      (match-string 1 cmds)
+    cmds))
+
 (defun poly-quarto-send-string-in-ess (string)
   "Set all ess variable and send string to process."
   (ess-force-buffer-current "Process to use: ")
@@ -781,8 +787,9 @@ and followed by `.` or ` ` or `\t` or `\n`."
    ((string= "ess-r-mode" name)
     (if (and indent (> indent 0))
        (let
-           ((cmds (poly-quarto--strip-indent
-                   (buffer-substring-no-properties beg end) indent)))
+           ((cmds (poly-quarto--remove-delim
+                   (poly-quarto--strip-indent
+                    (buffer-substring-no-properties beg end) indent))))
          (poly-quarto-send-string-in-ess cmds))
       (ess-eval-region beg end nil)))
    ;; Python via python-mode
