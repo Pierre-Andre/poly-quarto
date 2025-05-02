@@ -46,8 +46,10 @@ $$
    - it will replace
      #+begin_src
 $$
-x&=2
-$$
+\begin{align*}
+x=2
+\end{align*}
+\$\$
      #+end_src
      by
      #+begin_src
