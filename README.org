@@ -29,6 +29,52 @@ It (tries to) offers
 - better(?) LaTeX support (see section below),
 - integration with ispell (it skips code blocks).
 ** LaTeX support
+*** Using poly-quarto
+1. Use =poly-quarto-insert-align-block= or =C-M-a= to insert displayed equation to
+   have LaTeX block as
+   #+begin_src
+$$%
+\begin{align*}
+x&=2
+\end{align*}
+$$
+   #+end_src
+
+
+2. If you import some code without this convention use  =poly-quarto-fix-latex-delimiters=
+    to fix LaTeX delimiters:
+   - it will replace
+     #+begin_src
+$$
+x&=2
+$$
+     #+end_src
+     by
+     #+begin_src
+$$%
+\begin{align*}
+x&=2
+\end{align*}
+$$
+     #+end_src
+     and also math environments =eqnarray= =align= =equation= without LaTeX delimiters like
+     #+begin_src
+\begin{align*}
+x&=2
+\end{align*}
+     #+end_src
+     by math environment with LaTeX delimiters like
+     #+begin_src
+$$%
+\begin{align*}
+x&=2
+\end{align*}
+$$
+     #+end_src
+     The list of math environments without LaTeX delimiters is by
+     default =eqnarray= =align= =equation=
+     but it can be customized using custom
+     variable =poly-quarto-latex-delims=.
 *** Inline and displayed formula problem
 To start math in LaTeX there is a long standing use of =$$ ... $$=
 or =$ ... $= even it is preferable to use =\[ ... \]= or =\( ... \)=.
@@ -79,56 +125,10 @@ bla bla $x=2$, but $y=3$ and $z=4$.
   #+begin_src
 bla bla \(x=2\), but \(y=3\) and \(z=4\).
   #+end_src
-At after the last =$= in inline formula =$...$= there must be a
+After the last =$= in inline formula =$...$= above, there must be a
 punctuation sign (=.,;:!?=) or a "real" space
 or space equivalent (=~\n\t=). As this is a quite usual
 way to use inline formula it will be hopefully unnoticed.
-*** Using quarto
-1. Use =poly-quarto-insert-align-block= or =C-M-a= to insert displayed equation to
-   have LaTeX block as
-   #+begin_src
-   $$%
-\begin{align*}
-x&=2
-\end{align*}
-$$
-   #+end_src
-
-
-2. If you import some code without this convention use  =poly-quarto-fix-latex-delimiters=
-    to fix LaTeX delimiters:
-   - it will replace
-     #+begin_src
-$$
-x&=2
-$$
-     #+end_src
-     by
-     #+begin_src
-$$%
-\begin{align*}
-x&=2
-\end{align*}
-$$
-     #+end_src
-     and also math environments =eqnarray= =align= =equation= without LaTeX delimiters like
-     #+begin_src
-\begin{align*}
-x&=2
-\end{align*}
-     #+end_src
-     by math environment with LaTeX delimiters like
-     #+begin_src
-$$%
-\begin{align*}
-x&=2
-\end{align*}
-$$
-     #+end_src
-     The list of math environments without LaTeX delimiters is by
-     default =eqnarray= =align= =equation=
-     but it can be customized using custom
-     variable =poly-quarto-latex-delims=.
 ** Useful functions
 - =poly-quarto-fix-latex-delimiters=
 - =poly-quarto-insert-align-block= insert latex block with math =align*= environment at point (bound to =C-M-a=)
