@@ -16,15 +16,111 @@ editing [[https://quarto.org/][quarto]] documents.
 ** Philosophy
 =poly-quarto= mode use code from [[https://github.com/quarto-dev/quarto-emacs][quarto-emacs]] and [[https://github.com/polymode/poly-markdown][poly-markdown]] to implement quarto mode based on [[https://github.com/polymode/poly-markdown][polymode]].
 It (tries to) offers
+- direct support of quarto through [[https://github.com/polymode/poly-markdown][polymode]] without relying on
+   [[https://github.com/polymode/poly-markdown][poly-markdown]] and [[https://github.com/polymode/poly-markdown][polymode]],
 - div/pandoc block inner mode for construct
   #+begin_src
 ::: {#mytag name="Myname"}
 
 :::
   #+end_src
-  and outline support (Hit =<TAB>= on =::: {#mytag name="Myname"}= to hide/show, ie outline)
-- better LaTeX support
-- ispell support which skip code blocks
+  and outline support for it:
+  Hit =<TAB>= on =::: {#mytag name="Myname"}= to hide/show, ie outline,
+- better(?) LaTeX support (see section below),
+- integration with ispell (it skips code blocks).
+** LaTeX support
+*** Inline and displayed formula problem
+To start math in LaTeX there is a long standing use of =$$ ... $$=
+or =$ ... $= even it is preferable to use =\[ ... \]= or =\( ... \)=.
+This kind of delimiters are symetrical (the same delimiter denotes
+beginning and end of sequence) and it does not play well with polymode.
+To circumvent this problem poly-quarto enforces the use of non symmetric
+delimiters:
+
+- for displayed formula
+  #+begin_src
+$$%
+...
+$$
+  #+end_src
+  or
+  #+begin_src
+\[
+...
+\]
+  #+end_src
+  Inside these delimiters polymode use inderect buffer and
+  this like a "tex" file: it is advised to begin math environment
+  between these delimiters (even if quarto does not care) in order to keep latex-mode happy: for instance if
+  you use =amsmath= you can insert a latex block (=poly-quarto-insert-align-block= or =C-M-a=) as follows (other math environments are obviously possible):
+  #+begin_src
+$$%
+\begin{align*}
+x&=2
+\end{align*}
+$$
+  #+end_src
+  or classical/base LaTeX:
+  #+begin_src
+\[
+\begin{eqnarray*}
+x&=&2
+\end{eqnarray*}
+\]
+  #+end_src
+- for inline formula
+  #+begin_src
+bla bla $x=2$, but $y=3$ and $z=4$.
+  #+end_src
+  or
+  #+begin_src
+bla bla \(x=2\), but \(y=3\) and \(z=4\).
+  #+end_src
+At after the last =$= in inline formula =$...$= there must be a
+punctuation sign (=.,;:!?=) or a space (= ~\n\t=). As this is a quite usual
+way to use inline formula it will be hopefully unnoticed.
+*** Using quarto
+1. Use =poly-quarto-insert-align-block= or =C-M-a= to insert displayed equation to have LaTeX block as
+   #+begin_src
+$$%
+\begin{align*}
+x&=2
+\end{align*}
+$$
+   #+end_src
+
+
+2. If you import some code without this convention use  =poly-quarto-fix-latex-delimiters= to fix LaTeX delimiters:
+   - it will replace
+   #+begin_src
+$$
+x&=2
+$$
+   #+end_src
+   by
+   #+begin_src
+$$%
+\begin{align*}
+x&=2
+\end{align*}
+$$
+   #+end_src
+   and also math environments =eqnarray= =align= =equation= without LaTeX delimiters like
+   #+begin_src
+\begin{align*}
+x&=2
+\end{align*}
+   #+end_src
+    by math environment with LaTeX delimiters like
+   #+begin_src
+$$%
+\begin{align*}
+x&=2
+\end{align*}
+$$
+   #+end_src
+   The list of math environments without LaTeX delimiters is by default =eqnarray= =align= =equation=  but it can be customized using custom variable =poly-quarto-latex-delims=.
+
 ** TODO
 - [ ] cleaning preview/export
 - [ ] adding xref support for label/ref
